@@ -6,8 +6,8 @@ services:
     build:
       context: ./docker/workspace
       dockerfile: Dockerfile
-    env_file: 
-      - ../.env
+      args:
+        - PHP_VERSION=${PHP_VERSION}
     ports:
       - "80:80"
       - "443:443"
@@ -42,45 +42,46 @@ services:
     build:
       context: ./docker/php
       dockerfile: Dockerfile
-    env_file: ../.env
+      args:
+        - PHP_VERSION=${PHP_VERSION}
     volumes:
       - ../:/var/www
     working_dir: /var/www
     network_mode: service:workspace
 
-  composer:
-    restart: 'no'
-    image: composer/composer
-    command: install
-    env_file: ../.env
-    volumes:
-      - ../:/var/www
-    working_dir: /var/www
+  # composer:
+  #   restart: 'no'
+  #   image: composer/composer
+  #   command: install
+  #   env_file: ../.env
+  #   volumes:
+  #     - ../:/var/www
+  #   working_dir: /var/www
 
-  node:
-    build: ./docker/node
-    env_file: ../.env
-    tty: true
-    volumes:
-      - ../:/var/www
-    working_dir: /var/www
+  # node:
+  #   build: ./docker/node
+  #   env_file: ../.env
+  #   tty: true
+  #   volumes:
+  #     - ../:/var/www
+  #   working_dir: /var/www
 
-  mariadb:
-    image: mariadb:10.5
-    env_file: ../.env
-    volumes:
-      - mariadb:/var/lib/mysql
-      - ../.docker/data/mysql/log:/var/log/mysql
-      - ./docker/mariadb/config/my.cnf:/etc/mysql/conf.d/my.cnf
-    networks:
-      default:
-        aliases:
-          - mysql
+  # mariadb:
+  #   image: mariadb:10.5
+  #   env_file: ../.env
+  #   volumes:
+  #     - mariadb:/var/lib/mysql
+  #     - ../.docker/data/mysql/log:/var/log/mysql
+  #     - ./docker/mariadb/config/my.cnf:/etc/mysql/conf.d/my.cnf
+  #   networks:
+  #     default:
+  #       aliases:
+  #         - mysql
 
-  adminer:
-    image: adminer
-    restart: always
-    network_mode: service:workspace
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   network_mode: service:workspace
 
 volumes:
   mariadb:
