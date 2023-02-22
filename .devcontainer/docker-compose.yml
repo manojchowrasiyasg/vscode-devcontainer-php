@@ -6,7 +6,8 @@ services:
     build:
       context: ./docker/workspace
       dockerfile: Dockerfile
-    env_file: ../.env
+    env_file: 
+      - ../.env
     ports:
       - "80:80"
       - "443:443"
