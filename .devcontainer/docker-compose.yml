@@ -46,7 +46,7 @@ services:
     build:
       context: ./docker/php
       dockerfile: Dockerfile
-      env_file: ../.env
+    env_file: ../.env
     volumes:
       - ../:/var/www
     working_dir: /var/www
