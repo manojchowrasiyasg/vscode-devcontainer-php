@@ -88,42 +88,11 @@ services:
         aliases:
           - mysql
 
-  postgres:
-    build: ./docker/postgres
-    env_file: ../.env
-    volumes:
-      - postgres:/var/lib/postgresql/data
-
-  mongo:
-    image: mongo
-    restart: always
-    env_file: ../.env
-    volumes:
-      - mongo:/data/db
-
-  redis:
-    image: redis:6.0
-    env_file: ../.env
-    volumes:
-      - redis:/data
-
   adminer:
     image: adminer
     restart: always
     network_mode: service:workspace
 
-  mongo-express:
-    image: mongo-express
-    restart: always
-    env_file: ../.env
-    network_mode: service:workspace
-
 volumes:
   mariadb:
-    driver: local
-  postgres:
-    driver: local
-  mongo:
-    driver: local
-  redis:
     driver: local
