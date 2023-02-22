@@ -29,7 +29,7 @@ services:
 
   nginx:
     build: ./docker/nginx
-    env_file: ../.env
+    env_file: ./.env
     volumes:
       - ./docker/nginx/config:/etc/nginx/conf.d/
       - ../.docker/data/nginx/log:/var/log/nginx
